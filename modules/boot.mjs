@@ -1,4 +1,6 @@
-import {connect} from './sync.mjs?v=dcfc26fdbe14';import {mountItinerary} from './itinerary.mjs?v=dcfc26fdbe14';import {mountLedger} from './ledger.mjs?v=dcfc26fdbe14';import {mountMenu} from './menu.mjs?v=dcfc26fdbe14';import {koreaDay} from './ui.mjs?v=dcfc26fdbe14';
+import {mountNavigation} from './navigation.mjs?v=805c8568b1ec';
+import {connect} from './sync.mjs?v=805c8568b1ec';import {mountItinerary} from './itinerary.mjs?v=805c8568b1ec';import {mountLedger} from './ledger.mjs?v=805c8568b1ec';import {mountMenu} from './menu.mjs?v=805c8568b1ec';import {koreaDay} from './ui.mjs?v=805c8568b1ec';
+mountNavigation(document.getElementById('section-navigation'));
 const $=id=>document.getElementById(id);let client=null,starting=false,snapshot=null,day=koreaDay();
 function notice(message){$('toast').textContent=message;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),6000)}
 const state={getClient:()=>client,onError:notice,onSaved:notice,onDay:d=>document.getElementById(`tab-${Number(d.slice(-2))-17}`)?.click()};
