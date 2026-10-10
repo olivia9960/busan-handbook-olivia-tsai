@@ -1,4 +1,4 @@
-import {esc,safeUrl,dayOptions,busy,requireClient,koreaDay} from './ui.mjs?v=f6228d036dd9';import {updateRow,moveItems} from './sync.mjs?v=f6228d036dd9';
+import {esc,safeUrl,dayOptions,busy,requireClient,koreaDay} from './ui.mjs?v=3a2710bbae5d';import {updateRow,moveItems} from './sync.mjs?v=3a2710bbae5d';
 export function mountItinerary(root,client,state={}){
  let snapshot={itinerary:[]},date=koreaDay(),selected=new Set();const get=()=>requireClient(state.getClient?.()||client);const error=state.onError||alert;
  function render(s=snapshot,d=date){snapshot=s;date=d;const items=s.itinerary.filter(x=>x.date===date).sort((a,b)=>a.position-b.position||a.id.localeCompare(b.id));selected=new Set([...selected].filter(id=>s.itinerary.some(x=>x.id===id)));

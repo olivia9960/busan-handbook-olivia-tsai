@@ -13,7 +13,8 @@ button,input,select,textarea{font:inherit}input,select,textarea{color:var(--ink)
 @media(max-width:700px){.topbar nav{gap:12px}.sync-bar{font-size:11px}.wallet-summary{grid-template-columns:1fr}.wallet-summary strong{font-size:22px}.paper-form{padding:17px}.expense-card{flex-direction:column;gap:10px}.expense-buttons{justify-content:flex-end}.form-grid{gap:12px}.photo-actions{gap:8px}.photo-actions button{font-size:12px}.menu-row{grid-template-columns:25px 1fr;gap:9px}.menu-row .item-price{grid-column:2;grid-template-columns:1fr 75px}.menu-row .item-price small,.menu-row .confirm-price{grid-column:1/-1}.menu-tools{gap:8px}.menu-tools input{width:135px}.menu-results strong{font-size:20px}.paid-table{padding:12px}.photo-row{flex-wrap:wrap}.wallet-toolbar{gap:8px}.wallet-toolbar button{font-size:12px}}
 @media(max-width:380px){.form-grid{grid-template-columns:1fr}.topbar{padding-inline:12px}.brand{font-size:9px}.topbar nav{font-size:11px}.event-actions{gap:8px}}
 [data-photo-viewer]{max-width:95vw;width:min(700px,95vw);max-height:94vh;border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--white);overflow:auto}[data-photo-viewer]::backdrop{background:#183e4ab3}[data-photo-viewer] button{display:block;margin:0 0 12px auto;border:1px solid var(--line);padding:8px 14px;border-radius:8px;background:#fff}[data-photo-viewer] img{display:block;max-width:100%;max-height:80vh;object-fit:contain;margin:auto}
-/* 修正行程卡片寬度 */
+
+/* Keep itinerary cards in the wide content column at every screen size. */
 .timeline .event-card {
   grid-column: 3;
   min-width: 0;

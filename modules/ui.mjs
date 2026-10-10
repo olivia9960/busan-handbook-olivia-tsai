@@ -8,3 +8,5 @@ export function koreaDay(now=new Date()){const date=new Intl.DateTimeFormat('en-
 export function showPhotoViewer(url){
  document.querySelector('[data-photo-viewer]')?.remove();const dialog=document.createElement('dialog');dialog.dataset.photoViewer='';dialog.innerHTML='<button type="button" aria-label="關閉照片">關閉 ✕</button><img alt="照片檢視">';dialog.querySelector('img').src=safeUrl(url);dialog.querySelector('button').onclick=()=>{dialog.close?.();dialog.remove()};dialog.addEventListener('cancel',()=>dialog.remove());document.body.append(dialog);if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','');return dialog;
 }
+
+export async function duringRecognition(root,task){const previous=root.inert;root.inert=true;root.setAttribute('aria-busy','true');try{return await task()}finally{root.inert=previous;root.removeAttribute('aria-busy')}}
