@@ -19,3 +19,14 @@ button,input,select,textarea{font:inherit}input,select,textarea{color:var(--ink)
   grid-column: 3;
   min-width: 0;
 }
+
+.menu-import {margin-bottom:24px;padding-bottom:20px;border-bottom:1px dashed var(--line)}
+.menu-import details {margin:14px 0}
+.menu-import textarea {width:100%;border:1px solid #c5d2ce;border-radius:8px;padding:12px;background:#fff;max-width:100%}
+.menu-import [data-menu-prompt] {font-size:12px;margin-top:10px}
+.menu-import [data-import-menu] {margin-top:12px}
+.menu-photo-optional {margin-bottom:22px}
+.menu-photo-optional summary {cursor:pointer;font-weight:600;margin-bottom:14px}
+.saved-photo-picker {display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:16px 0}
+.saved-photo-picker label {display:flex;flex-direction:column;gap:6px;font-size:13px}
+.saved-photo-picker select {max-width:100%;padding:10px;border:1px solid #c5d2ce;border-radius:8px;background:#fff;min-height:44px}
