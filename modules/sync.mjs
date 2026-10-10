@@ -1,0 +1,17 @@
+export function decodeRow(r){return {...r.payload,id:r.id,trip_id:r.trip_id,version:r.version}}
+const fail=e=>{if(e)throw Error(/VERSION_CONFLICT/.test(e.message)?'有人已修改這筆資料，請重新載入後核對。':e.message||'無法保存，請稍後重試')};
+export async function connect(config,onSnapshot,onStatus,factory=globalThis.supabase?.createClient){
+ if(!/^https:\/\//.test(config.SUPABASE_URL)||!config.SUPABASE_PUBLIC_KEY)throw Error('尚未設定 Supabase：請依部署教學填寫 config.js');if(!factory)throw Error('同步程式未載入');
+ onStatus('connecting');const client=factory(config.SUPABASE_URL,config.SUPABASE_PUBLIC_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});client.tripId=config.TRIP_ID;
+ const {data,error}=await client.auth.getSession();fail(error);if(!data.session){const res=await client.auth.signInAnonymously();fail(res.error)}
+ let running=false,again=false,closed=false;
+ client.refresh=async()=>{if(closed)return;if(running){again=true;return}running=true;try{do{again=false;const tables=['trips','itinerary_items','expenses','menu_estimates','receipt_uploads'];const results=await Promise.all(tables.map(t=>client.from(t).select('*').eq(t==='trips'?'id':'trip_id',client.tripId).order('id')));results.forEach(r=>fail(r.error));const rows=results.map(r=>(r.data||[]).filter(r=>!r.deleted_at).map(decodeRow));if(!rows[0][0])throw Error('尚未建立旅程資料，請執行 setup.sql 與 seed.sql');client.snapshot={trip:rows[0][0],itinerary:rows[1],expenses:rows[2],menus:rows[3],photos:rows[4]};onSnapshot(client.snapshot);onStatus(navigatorSafeOnline()?'synced':'error')}while(again&&!closed)}catch(e){onStatus('error',e.message);throw e}finally{running=false}};
+ await client.refresh();let channel=client.channel(`busan-${client.tripId}`);for(const t of ['trips','itinerary_items','expenses','menu_estimates','receipt_uploads'])channel=channel.on('postgres_changes',{event:'*',schema:'public',table:t,filter:`${t==='trips'?'id':'trip_id'}=eq.${client.tripId}`},()=>client.refresh().catch(()=>{}));channel.subscribe(s=>{if(s==='SUBSCRIBED')client.refresh().catch(()=>{});else if(['CHANNEL_ERROR','TIMED_OUT','CLOSED'].includes(s))onStatus('error','即時連線中斷，正在重新連線')});
+ const reconnect=()=>client.refresh().catch(()=>{}),offline=()=>onStatus('error','目前離線，請連網後再保存');globalThis.addEventListener?.('online',reconnect);globalThis.addEventListener?.('offline',offline);client.disconnect=()=>{closed=true;client.removeChannel(channel);globalThis.removeEventListener?.('online',reconnect);globalThis.removeEventListener?.('offline',offline)};return client;
+}
+function navigatorSafeOnline(){return globalThis.navigator?.onLine!==false}
+export async function updateRow(client,table,id,patch,version){const {data,error}=await client.rpc('write_record',{p_table:table,p_record:{id,...patch},p_version:version});fail(error);await client.refresh?.();return data}
+export async function moveItems(client,ids,targetDate,versions){const {data,error}=await client.rpc('move_items',{p_ids:ids,p_date:targetDate,p_versions:versions});fail(error);await client.refresh?.();return data}
+async function save(client,table,row){const {id,version,trip_id,...payload}=row;const {data,error}=await client.rpc('write_record',{p_table:table,p_record:{id:id||crypto.randomUUID(),...payload},p_version:version??null});fail(error);await client.refresh?.();return data}
+export const saveExpense=(c,e)=>save(c,'expenses',e);export const saveMenu=(c,m)=>save(c,'menu_estimates',m);
+export const deleteRow=(c,t,row)=>updateRow(c,t,row.id,{_deleted:true},row.version);
