@@ -1,4 +1,4 @@
-import {convert,toMinor} from './money.mjs?v=618d4a402e16';
+import {convert,toMinor} from './money.mjs?v=63fe23426711';
 export const MENU_AI_PROMPT=`請將我接著提供的菜單圖片或文字，整理成可匯入「釜山旅行網站」的 JSON。
 請將菜名翻成繁體中文，保留韓文或其他原文。只輸出一個完整 JSON，不要加說明或 Markdown 表格。
 格式必須如下（範例數字不可當成實際菜單）：
