@@ -1,4 +1,4 @@
-import {validateExpense,validateRates,summarize,format,convert} from './money.mjs?v=e4299f7b08ec';import {saveExpense,updateRow,deleteRow} from './sync.mjs?v=e4299f7b08ec';import {uploadPhoto,photoUrl,recognizePhoto,removePhoto} from './photos.mjs?v=e4299f7b08ec';import {esc,currencies,busy,requireClient,koreaDay,showPhotoViewer,duringRecognition} from './ui.mjs?v=e4299f7b08ec';
+import {validateExpense,validateRates,summarize,format,convert} from './money.mjs?v=618d4a402e16';import {saveExpense,updateRow,deleteRow} from './sync.mjs?v=618d4a402e16';import {uploadPhoto,photoUrl,recognizePhoto,removePhoto} from './photos.mjs?v=618d4a402e16';import {esc,currencies,busy,requireClient,koreaDay,showPhotoViewer,duringRecognition} from './ui.mjs?v=618d4a402e16';
 export function mountLedger(root,client,state={}){
  let snapshot={trip:{rates:null},expenses:[],photos:[]},draftId=crypto.randomUUID(),editVersion=null,attachment=null,requestId=null,receiptBlob=null,attachmentOwned=false,ratesDirty=false,ratesVersion=null;
  const get=()=>requireClient(state.getClient?.()||client),error=state.onError||alert;

@@ -1,5 +1,5 @@
-import {parseMenuImport,MENU_AI_PROMPT} from './menu-import.mjs?v=e4299f7b08ec';
-import {estimateMeal,format,toMinor} from './money.mjs?v=e4299f7b08ec';import {saveMenu,deleteRow} from './sync.mjs?v=e4299f7b08ec';import {uploadPhoto,photoUrl,recognizePhoto,removePhoto} from './photos.mjs?v=e4299f7b08ec';import {esc,currencies,busy,requireClient,koreaDay,duringRecognition} from './ui.mjs?v=e4299f7b08ec';
+import {parseMenuImport,MENU_AI_PROMPT} from './menu-import.mjs?v=618d4a402e16';
+import {estimateMeal,format,toMinor} from './money.mjs?v=618d4a402e16';import {saveMenu,deleteRow} from './sync.mjs?v=618d4a402e16';import {uploadPhoto,photoUrl,recognizePhoto,removePhoto} from './photos.mjs?v=618d4a402e16';import {esc,currencies,busy,requireClient,koreaDay,duringRecognition} from './ui.mjs?v=618d4a402e16';
 export function mountMenu(root,client,state={},onExpenseDraft=()=>{}){
  let snapshot={trip:{rates:null},menus:[],photos:[]},draft={id:crypto.randomUUID(),title:'本餐試算',date:koreaDay(),items:[],budget:null,photo_id:null},dirty=false,requestId=null,menuBlob=null;
  const get=()=>requireClient(state.getClient?.()||client),error=state.onError||alert;
