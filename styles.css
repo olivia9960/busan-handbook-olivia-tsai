@@ -46,3 +46,13 @@ button,input,select,textarea{font:inherit}input,select,textarea{color:var(--ink)
 
 /* Raise the whole open card, including completed cards, above its siblings. */
 .timeline .event:has(.event-options[open]){position:relative;z-index:4}
+
+/* Keep section navigation within thumb reach on phones. */
+@media screen and (max-width:700px){
+ body{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+ .topbar nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:100;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;padding:6px;background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 25px #183e4a25;font-size:13px}
+ .topbar nav a,.topbar nav a:last-child{display:flex;align-items:center;justify-content:center;min-height:44px;padding:4px 2px;border-radius:10px;white-space:nowrap}
+ .topbar nav a:hover,.topbar nav a:focus-visible{background:#e6f1ed;color:var(--blue)}
+ .menu-results{bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+ #toast{bottom:calc(90px + env(safe-area-inset-bottom,0px));z-index:110}
+}

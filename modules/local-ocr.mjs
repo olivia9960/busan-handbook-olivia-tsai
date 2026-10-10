@@ -1,5 +1,5 @@
-import {parseReceipt,parseMenu,validatePhoto} from './ocr-parser.mjs?v=63fe23426711';
-import {translateMenuLocally} from './dish-dictionary.mjs?v=63fe23426711';
+import {parseReceipt,parseMenu,validatePhoto} from './ocr-parser.mjs?v=dcfc26fdbe14';
+import {translateMenuLocally} from './dish-dictionary.mjs?v=dcfc26fdbe14';
 const base=new URL('../vendor/ocr/',import.meta.url);let loading=null,running=false;
 async function loadEngine(){
  if(globalThis.Tesseract?.createWorker)return globalThis.Tesseract;
