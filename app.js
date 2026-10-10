@@ -4,7 +4,7 @@
 const trip=window.TRIP, $=id=>document.getElementById(id);
 const iconNames={flight:'plane',move:'suitcase',spot:'capsule',food:'food',coffee:'coffee',stay:'suitcase'};
 const sticker=name=>`<svg class="sticker-icon" aria-hidden="true"><use href="assets/stickers.svg#${name}"></use></svg>`;
-const dayPhotos=[['capsule.jpg','海邊膠囊實景','今天，搭著膠囊去看海。','capsule'],['coffee.jpg','全浦咖啡街街區氛圍','咖啡街氛圍參考 · 非指定店家','coffee'],['cable.jpg','松島海上纜車實景','把整片海，放在腳下。','cable'],['temple.jpg','海東龍宮寺實景','最後一天，也要好好看海。','suitcase']];
+const dayPhotos=[['capsule.jpg','海邊膠囊實景','海邊膠囊 · 17:30 入場','capsule'],['coffee.jpg','全浦咖啡街街區氛圍','咖啡街氛圍參考 · 非指定店家','coffee'],['cable.jpg','松島海上纜車實景','松島海上纜車 · 使用 Busan Pass','cable'],['temple.jpg','海東龍宮寺實景','海東龍宮寺 · 記得留回程時間','suitcase']];
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const link=(url,label,cls='')=>`<a class="${cls}" href="${escape(url)}" target="_blank" rel="noopener noreferrer">${escape(label)} ↗</a>`;
 let toastTimer;

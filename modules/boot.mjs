@@ -1,5 +1,5 @@
-import {mountNavigation} from './navigation.mjs?v=805c8568b1ec';
-import {connect} from './sync.mjs?v=805c8568b1ec';import {mountItinerary} from './itinerary.mjs?v=805c8568b1ec';import {mountLedger} from './ledger.mjs?v=805c8568b1ec';import {mountMenu} from './menu.mjs?v=805c8568b1ec';import {koreaDay} from './ui.mjs?v=805c8568b1ec';
+import {mountNavigation} from './navigation.mjs?v=c2d3fef3332e';
+import {connect} from './sync.mjs?v=c2d3fef3332e';import {mountItinerary} from './itinerary.mjs?v=c2d3fef3332e';import {mountLedger} from './ledger.mjs?v=c2d3fef3332e';import {mountMenu} from './menu.mjs?v=c2d3fef3332e';import {koreaDay} from './ui.mjs?v=c2d3fef3332e';
 mountNavigation(document.getElementById('section-navigation'));
 const $=id=>document.getElementById(id);let client=null,starting=false,snapshot=null,day=koreaDay();
 function notice(message){$('toast').textContent=message;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),6000)}
